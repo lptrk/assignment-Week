@@ -4,19 +4,20 @@ import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class FeedingScheduleEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    private LocalTime feedingTime; // Zeitpunkt der Fütterung
-    private int numberOfFeedings; // Anzahl der Fütterungen pro Tag
+    private LocalTime feedingTime;
+    private int numberOfFeedings;
 
     @ManyToOne
     @JoinColumn(name = "horse_id")
-    private HorseEntity horse; // Verweis auf das betreffende Pferd
+    private HorseEntity horse;
+
 
 }

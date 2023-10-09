@@ -1,9 +1,11 @@
 package com.accenture.assignmentWeek.horse;
 
+import com.accenture.assignmentWeek.feeding.FeedingScheduleEntity;
 import com.accenture.assignmentWeek.stable.StableEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class HorseEntity {
@@ -19,6 +21,10 @@ public class HorseEntity {
     @JoinColumn(name = "stable_id")
     private StableEntity stable;
 
+    @OneToMany(mappedBy = "horse")
+    private List<FeedingScheduleEntity> feedingSchedules;
+
+
     private LocalDateTime lastFeedingTime;
-    private Integer numberODailyFeedings;
+    private Integer numberOfDailyFeedings;
 }
