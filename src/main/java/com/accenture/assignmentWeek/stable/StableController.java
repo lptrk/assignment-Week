@@ -27,6 +27,11 @@ public class StableController {
         return new ResponseEntity<>(stableService.getStableById(id), HttpStatus.OK);
     }
 
+    @PostMapping("stables")
+    public ResponseEntity<StableEntity> saveStable(StableEntity stableEntity) {
+        return new ResponseEntity<>(stableService.saveStable(stableEntity), HttpStatus.CREATED);
+    }
+
     @PutMapping("stables/{id}")
     public ResponseEntity<StableEntity> updateStableById(@PathVariable("id") Long id, @RequestBody StableEntity stable) {
         return new ResponseEntity<>(stableService.updateStableById(id, stable), HttpStatus.OK);

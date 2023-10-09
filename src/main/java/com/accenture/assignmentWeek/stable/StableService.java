@@ -13,13 +13,17 @@ public class StableService {
     private final StableRepository stableRepository;
 
 
-    public List<StableEntity> getAllStables(){
+    public List<StableEntity> getAllStables() {
         return stableRepository.findAll();
     }
 
     public StableEntity getStableById(Long id) {
         return stableRepository.findById(id)
                 .orElseThrow();
+    }
+
+    public StableEntity saveStable(StableEntity stableEntity) {
+        return stableRepository.save(stableEntity);
     }
 
     public StableEntity updateStableById(Long id, StableEntity stable) {
