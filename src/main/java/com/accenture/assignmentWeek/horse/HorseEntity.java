@@ -17,6 +17,19 @@ public class HorseEntity {
     private String nickName;
     private String breed;
 
+    private String owner;
+
+    @ManyToOne
+    @JoinColumn(name = "stable_id")
+    private StableEntity stable;
+
+    @OneToMany(mappedBy = "horse")
+    private List<FeedingScheduleEntity> feedingSchedules;
+
+
+    private LocalDateTime lastFeedingTime;
+    private Integer numberOfDailyFeedings;
+
     @Override
     public String toString() {
         return "HorseEntity{" +
@@ -132,16 +145,5 @@ public class HorseEntity {
         this.numberOfDailyFeedings = numberOfDailyFeedings;
     }
 
-    private String owner;
 
-    @ManyToOne
-    @JoinColumn(name = "stable_id")
-    private StableEntity stable;
-
-    @OneToMany(mappedBy = "horse")
-    private List<FeedingScheduleEntity> feedingSchedules;
-
-
-    private LocalDateTime lastFeedingTime;
-    private Integer numberOfDailyFeedings;
 }

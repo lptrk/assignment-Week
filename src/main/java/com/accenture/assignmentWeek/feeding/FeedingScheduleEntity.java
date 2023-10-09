@@ -16,6 +16,10 @@ public class FeedingScheduleEntity {
     private LocalTime feedingTime;
     private int numberOfFeedings;
 
+    @ManyToOne
+    @JoinColumn(name = "horse_id")
+    private HorseEntity horse;
+
     @Override
     public String toString() {
         return "FeedingScheduleEntity{" +
@@ -81,9 +85,6 @@ public class FeedingScheduleEntity {
         this.horse = horse;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "horse_id")
-    private HorseEntity horse;
 
 
 }

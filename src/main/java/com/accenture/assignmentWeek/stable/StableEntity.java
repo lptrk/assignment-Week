@@ -8,6 +8,11 @@ import java.util.Objects;
 
 @Entity
 public class StableEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "stable")
+    private List<HorseEntity> horses;
     public StableEntity() {
 
     }
@@ -54,9 +59,5 @@ public class StableEntity {
         this.horses = horses;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @OneToMany(mappedBy = "stable")
-    private List<HorseEntity> horses;
+
 }
