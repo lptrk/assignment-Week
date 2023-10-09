@@ -26,6 +26,11 @@ public class FeedingScheduleController {
         return new ResponseEntity<>(feedingScheduleService.getFeedingScheduleById(id), HttpStatus.OK);
     }
 
+    @PostMapping("feedung-schedules")
+    public ResponseEntity<FeedingScheduleEntity> saveFeedingSchedules(FeedingScheduleEntity feedingScheduleEntity) {
+        return new ResponseEntity<>(feedingScheduleService.saveFeedingSchedule(feedingScheduleEntity), HttpStatus.CREATED);
+    }
+
     @PutMapping("feeding-schedules/{id}")
     public ResponseEntity<FeedingScheduleEntity> updateFeedingScheduleById(@PathVariable("id") Long id, @RequestBody FeedingScheduleEntity feedingScheduleEntity) {
         return new ResponseEntity<>(feedingScheduleService.updateFeedingScheduleById(id, feedingScheduleEntity), HttpStatus.OK);

@@ -12,11 +12,11 @@ public class FeedingScheduleService {
 
     private final FeedingScheduleRepository feedingScheduleRepository;
 
-    public List<FeedingScheduleEntity> getAllFeedingSchedules(){
+    public List<FeedingScheduleEntity> getAllFeedingSchedules() {
         return feedingScheduleRepository.findAll();
     }
 
-    public FeedingScheduleEntity getFeedingScheduleById(Long id){
+    public FeedingScheduleEntity getFeedingScheduleById(Long id) {
         return feedingScheduleRepository.findById(id).orElseThrow();
     }
 
@@ -27,6 +27,10 @@ public class FeedingScheduleService {
         entityToUpdate.setNumberOfFeedings(feedingScheduleEntity.getNumberOfFeedings());
 
         return entityToUpdate;
+    }
+
+    public FeedingScheduleEntity saveFeedingSchedule(FeedingScheduleEntity feedingScheduleEntity) {
+        return feedingScheduleRepository.save(feedingScheduleEntity);
     }
 
     public void deleteFeedingScheduleById(Long id) {
