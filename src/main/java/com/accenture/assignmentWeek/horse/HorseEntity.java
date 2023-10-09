@@ -26,7 +26,6 @@ public class HorseEntity {
     @OneToMany(mappedBy = "horse")
     private List<FeedingScheduleEntity> feedingSchedules;
 
-
     private LocalDateTime lastFeedingTime;
     private Integer numberOfDailyFeedings;
 
