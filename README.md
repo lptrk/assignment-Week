@@ -1,4 +1,4 @@
-Assignment Week
+# Assignment Week
 
 
 
@@ -26,43 +26,43 @@ You are free to choose additional technology to your liking, but at a minimum it
 
 
 
-MySQL
+- MySQL
 
-Spring Data JDBC (RowMapper or Entities) or Spring Data JPA (with Hibernate)
+- Spring Data JDBC (RowMapper or Entities) or Spring Data JPA (with Hibernate)
 
-Spring MVC
+- Spring MVC
 
-Spring Boot
-
-
-
-Application Features
+- Spring Boot
 
 
 
-Create REST services for:
+## Application Features
 
 
 
-Creating, Updating, Removing and Reading a stable
-
-Adding, removing, updating and reading horses and necessary data
-
-Create services for maintaining feeding preferences for horses
-
-Create services for checking what horses are eligible for feeding at this time or a manually entered time (see: @RequestParam for additional parameters)
-
-Create services for releasing food (mark a feeding operation as “done”). In real life, Horses can walk toward feeding stations where the RFID chip causes this operation.
-
-Create services to check if horses have not been fed even when eligible for more than $x hours.
-
-Create a service that reports horses who have missed their feeding range 1, 2, or more times in a row.
-
-Create a service that reports horses that didn't complete their meals.
+### Create REST services for:
 
 
 
-Horses:
+- Creating, Updating, Removing and Reading a stable
+
+- Adding, removing, updating and reading horses and necessary data
+
+- Create services for maintaining feeding preferences for horses
+
+- Create services for checking what horses are eligible for feeding at this time or a manually entered time (see: @RequestParam for additional parameters)
+
+- Create services for releasing food (mark a feeding operation as “done”). In real life, Horses can walk toward feeding stations where the RFID chip causes this operation.
+
+- Create services to check if horses have not been fed even when eligible for more than $x hours.
+
+- Create a service that reports horses who have missed their feeding range 1, 2, or more times in a row.
+
+- Create a service that reports horses that didn't complete their meals.
+
+
+
+## Horses:
 
 … have a GUID (necessary for the RFID chip) which needs to be created by the software
 
@@ -76,7 +76,7 @@ Horses:
 
 
 
-Food:
+## Food:
 
 Horses can eat 1-5 times a day within a feeding range. The ranges cannot overlap.
 
