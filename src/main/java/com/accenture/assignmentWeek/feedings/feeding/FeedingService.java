@@ -63,6 +63,9 @@ public class FeedingService {
         return eligibleHorses.isEmpty() ? Collections.emptyList() : eligibleHorses;
     }
 
+    //TODO: implement feeding logic
+    //TODO: get feeding schedule of horse
+    //TODO: implement missed feeding logic
 
 
 
