@@ -21,12 +21,12 @@ public class FeedingScheduleEntity {
     @OneToOne
     @JoinColumn(name = "feeding_preferences_id")
     private FeedingPreferencesEntity feedingPreferences;
+
     @Override
     public String toString() {
         return "FeedingScheduleEntity{" +
                 "id=" + id +
                 ", feedingTime=" + feedingTime +
-                ", numberOfFeedings=" + numberOfFeedings +
                 ", horse=" + horse +
                 '}';
     }
@@ -36,12 +36,12 @@ public class FeedingScheduleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FeedingScheduleEntity that = (FeedingScheduleEntity) o;
-        return numberOfFeedings == that.numberOfFeedings && Objects.equals(id, that.id) && Objects.equals(feedingTime, that.feedingTime) && Objects.equals(horse, that.horse);
+        return Objects.equals(id, that.id) && Objects.equals(feedingTime, that.feedingTime) && Objects.equals(horse, that.horse);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, feedingTime, numberOfFeedings, horse);
+        return Objects.hash(id, feedingTime, horse);
     }
 
     public Long getId() {
@@ -60,13 +60,6 @@ public class FeedingScheduleEntity {
         this.feedingTime = feedingTime;
     }
 
-    public int getNumberOfFeedings() {
-        return numberOfFeedings;
-    }
-
-    public void setNumberOfFeedings(int numberOfFeedings) {
-        this.numberOfFeedings = numberOfFeedings;
-    }
 
     public HorseEntity getHorse() {
         return horse;
@@ -79,10 +72,9 @@ public class FeedingScheduleEntity {
     public FeedingScheduleEntity() {
     }
 
-    public FeedingScheduleEntity(Long id, LocalTime feedingTime, int numberOfFeedings, HorseEntity horse) {
+    public FeedingScheduleEntity(Long id, LocalTime feedingTime, HorseEntity horse) {
         this.id = id;
         this.feedingTime = feedingTime;
-        this.numberOfFeedings = numberOfFeedings;
         this.horse = horse;
     }
 

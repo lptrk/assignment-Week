@@ -26,7 +26,7 @@ public class FeedingPreferencesService {
         entityToUpdate.setFoodType(feedingPreferencesEntity.getFoodType());
         entityToUpdate.setHorse(feedingPreferencesEntity.getHorse());
 
-        return entityToUpdate;
+        return feedingPreferencesRepository.save(entityToUpdate);
     }
 
     public FeedingPreferencesEntity saveFeedingPreerences(FeedingPreferencesEntity feedingPreferencesEntity) {

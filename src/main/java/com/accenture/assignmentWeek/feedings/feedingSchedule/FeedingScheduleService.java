@@ -24,9 +24,8 @@ public class FeedingScheduleService {
         FeedingScheduleEntity entityToUpdate = feedingScheduleRepository.findById(id).orElseThrow();
         entityToUpdate.setFeedingTime(feedingScheduleEntity.getFeedingTime());
         entityToUpdate.setHorse(feedingScheduleEntity.getHorse());
-        entityToUpdate.setNumberOfFeedings(feedingScheduleEntity.getNumberOfFeedings());
 
-        return entityToUpdate;
+        return feedingScheduleRepository.save(entityToUpdate);
     }
 
     public FeedingScheduleEntity saveFeedingSchedule(FeedingScheduleEntity feedingScheduleEntity) {
