@@ -1,4 +1,4 @@
-package com.accenture.assignmentWeek.feedingPreferences;
+package com.accenture.assignmentWeek.feedings.feedingPreferences;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

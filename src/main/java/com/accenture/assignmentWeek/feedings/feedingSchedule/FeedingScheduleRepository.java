@@ -1,4 +1,4 @@
-package com.accenture.assignmentWeek.feedingSchedule;
+package com.accenture.assignmentWeek.feedings.feedingSchedule;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

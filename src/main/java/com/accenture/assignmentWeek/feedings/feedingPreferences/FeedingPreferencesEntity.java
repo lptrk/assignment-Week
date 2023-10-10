@@ -1,4 +1,4 @@
-package com.accenture.assignmentWeek.feedingPreferences;
+package com.accenture.assignmentWeek.feedings.feedingPreferences;
 
 import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;

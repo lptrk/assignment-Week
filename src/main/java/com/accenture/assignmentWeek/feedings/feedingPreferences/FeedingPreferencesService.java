@@ -1,6 +1,5 @@
-package com.accenture.assignmentWeek.feedingPreferences;
+package com.accenture.assignmentWeek.feedings.feedingPreferences;
 
-import com.accenture.assignmentWeek.feedingSchedule.FeedingScheduleEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
