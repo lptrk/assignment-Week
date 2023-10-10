@@ -17,7 +17,7 @@ public class HorseService {
     }
 
     public HorseEntity getHorseById(String id) {
-        return horseRepository.findById(id).orElseThrow();
+        return horseRepository.findById(id).orElse(null);
     }
 
     public HorseEntity saveHorse(HorseEntity horse) {

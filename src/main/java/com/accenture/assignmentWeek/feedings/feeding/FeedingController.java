@@ -1,5 +1,6 @@
 package com.accenture.assignmentWeek.feedings.feeding;
 
+import com.accenture.assignmentWeek.horse.HorseEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,11 @@ public class FeedingController {
     @GetMapping("feedings/{id}")
     public ResponseEntity<FeedingEntity> getFeedingById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(feedingService.getFeedingById(id));
+    }
+
+    @GetMapping("feedings/eligible")
+    public ResponseEntity<List<HorseEntity>> getEligibleHorses() {
+        return ResponseEntity.ok(feedingService.getEligibleHorses());
     }
 
     @PutMapping("feedings/{id}")
