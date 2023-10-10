@@ -26,8 +26,8 @@ public class FeedingScheduleController {
         return new ResponseEntity<>(feedingScheduleService.getFeedingScheduleById(id), HttpStatus.OK);
     }
 
-    @PostMapping("feedung-schedules")
-    public ResponseEntity<FeedingScheduleEntity> saveFeedingSchedules(FeedingScheduleEntity feedingScheduleEntity) {
+    @PostMapping("feeding-schedules")
+    public ResponseEntity<FeedingScheduleEntity> saveFeedingSchedules(@RequestBody FeedingScheduleEntity feedingScheduleEntity) {
         return new ResponseEntity<>(feedingScheduleService.saveFeedingSchedule(feedingScheduleEntity), HttpStatus.CREATED);
     }
 
