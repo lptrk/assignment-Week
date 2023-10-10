@@ -16,7 +16,7 @@ public class HorseEntity {
     private String rfid;
     private String name;
     private String nickName;
-    private String breed;
+    private Breed breed;
     private String owner;
     @ManyToOne
     @JoinColumn(name = "stable_id")
@@ -82,11 +82,11 @@ public class HorseEntity {
         this.nickName = nickName;
     }
 
-    public String getBreed() {
+    public Breed getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(Breed breed) {
         this.breed = breed;
     }
 
@@ -126,7 +126,7 @@ public class HorseEntity {
         this.feedingPreferences = feedingPreferences;
     }
 
-    public HorseEntity(String rfid, String name, String nickName, String breed, String owner, StableEntity stable, List<FeedingScheduleEntity> feedingSchedules, List<FeedingPreferencesEntity> feedingPreferences, LocalDateTime lastFeedingTime, Integer numberOfDailyFeedings) {
+    public HorseEntity(String rfid, String name, String nickName, Breed breed, String owner, StableEntity stable, List<FeedingScheduleEntity> feedingSchedules, List<FeedingPreferencesEntity> feedingPreferences, LocalDateTime lastFeedingTime, Integer numberOfDailyFeedings) {
         this.rfid = rfid;
         this.name = name;
         this.nickName = nickName;

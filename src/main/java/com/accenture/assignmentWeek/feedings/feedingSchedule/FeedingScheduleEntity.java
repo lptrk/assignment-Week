@@ -14,7 +14,6 @@ public class FeedingScheduleEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalTime feedingTime;
-    private int numberOfFeedings;
 
     @ManyToOne
     @JoinColumn(name = "horse_id")

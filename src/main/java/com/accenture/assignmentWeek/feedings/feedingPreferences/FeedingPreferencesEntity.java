@@ -18,7 +18,7 @@ public class FeedingPreferencesEntity {
 
     private String foodType; //TODO: Add FoodTypeEntity
     @OneToOne(mappedBy = "feedingPreferences")
-    private FeedingScheduleEntity feedingSchedule;
+    private FeedingScheduleEntity feedingSchedule; //List<feedingScheduleEntities>
     public FeedingPreferencesEntity() {
     }
 
