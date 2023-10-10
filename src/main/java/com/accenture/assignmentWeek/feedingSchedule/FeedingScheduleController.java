@@ -1,4 +1,4 @@
-package com.accenture.assignmentWeek.feeding;
+package com.accenture.assignmentWeek.feedingSchedule;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

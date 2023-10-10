@@ -1,10 +1,9 @@
-package com.accenture.assignmentWeek.feeding;
+package com.accenture.assignmentWeek.feedingSchedule;
 
 import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Objects;
 
 @Entity

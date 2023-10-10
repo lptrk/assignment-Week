@@ -1,6 +1,6 @@
 package com.accenture.assignmentWeek.horse;
 
-import com.accenture.assignmentWeek.feeding.FeedingScheduleEntity;
+import com.accenture.assignmentWeek.feedingSchedule.FeedingScheduleEntity;
 import com.accenture.assignmentWeek.stable.StableEntity;
 import jakarta.persistence.*;
 
