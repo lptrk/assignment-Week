@@ -26,7 +26,7 @@ public class HorseController {
     }
 
     @PostMapping("horses")
-    public ResponseEntity<HorseEntity> saveHorse(HorseEntity horse) {
+    public ResponseEntity<HorseEntity> saveHorse(@RequestBody HorseEntity horse) {
         return new ResponseEntity<>(horseService.saveHorse(horse), HttpStatus.CREATED);
     }
 
