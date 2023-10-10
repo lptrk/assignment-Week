@@ -25,19 +25,18 @@ public class HorseService {
     }
 
     public HorseEntity updateHorseById(String id, HorseEntity horse) {
-        HorseEntity entityToUpdate = horse;
 
-        entityToUpdate.setBreed(horse.getBreed());
-        entityToUpdate.setName(horse.getName());
-        entityToUpdate.setFeedingSchedules(horse.getFeedingSchedules());
-        entityToUpdate.setOwner(horse.getOwner());
-        entityToUpdate.setNickName(horse.getNickName());
-        entityToUpdate.setStable(horse.getStable());
+        horse.setBreed(horse.getBreed());
+        horse.setName(horse.getName());
+        horse.setFeedingSchedules(horse.getFeedingSchedules());
+        horse.setOwner(horse.getOwner());
+        horse.setNickName(horse.getNickName());
+        horse.setStable(horse.getStable());
 
-        return entityToUpdate;
+        return horseRepository.save(horse);
     }
 
-    public void deleteHorseById(String id){
+    public void deleteHorseById(String id) {
         horseRepository.deleteById(id);
     }
 }
