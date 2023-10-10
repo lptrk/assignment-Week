@@ -1,5 +1,6 @@
 package com.accenture.assignmentWeek.horse;
 
+import com.accenture.assignmentWeek.feedingPreferences.FeedingPreferencesEntity;
 import com.accenture.assignmentWeek.feedingSchedule.FeedingScheduleEntity;
 import com.accenture.assignmentWeek.stable.StableEntity;
 import jakarta.persistence.*;
@@ -16,18 +17,20 @@ public class HorseEntity {
     private String name;
     private String nickName;
     private String breed;
-
     private String owner;
-
     @ManyToOne
     @JoinColumn(name = "stable_id")
     private StableEntity stable;
-
     @OneToMany(mappedBy = "horse")
     private List<FeedingScheduleEntity> feedingSchedules;
-
+    @OneToMany(mappedBy = "horse")
+    private List<FeedingPreferencesEntity> feedingPreferences;
     private LocalDateTime lastFeedingTime;
     private Integer numberOfDailyFeedings;
+
+    public HorseEntity() {
+
+    }
 
     @Override
     public String toString() {
@@ -129,10 +132,11 @@ public class HorseEntity {
         this.numberOfDailyFeedings = numberOfDailyFeedings;
     }
 
-    public HorseEntity() {
+    public HorseEntity(List<FeedingPreferencesEntity> feedingPreferences) {
+        this.feedingPreferences = feedingPreferences;
     }
 
-    public HorseEntity(String rfid, String name, String nickName, String breed, String owner, StableEntity stable, List<FeedingScheduleEntity> feedingSchedules, LocalDateTime lastFeedingTime, Integer numberOfDailyFeedings) {
+    public HorseEntity(String rfid, String name, String nickName, String breed, String owner, StableEntity stable, List<FeedingScheduleEntity> feedingSchedules, List<FeedingPreferencesEntity> feedingPreferences, LocalDateTime lastFeedingTime, Integer numberOfDailyFeedings) {
         this.rfid = rfid;
         this.name = name;
         this.nickName = nickName;
@@ -140,6 +144,7 @@ public class HorseEntity {
         this.owner = owner;
         this.stable = stable;
         this.feedingSchedules = feedingSchedules;
+        this.feedingPreferences = feedingPreferences;
         this.lastFeedingTime = lastFeedingTime;
         this.numberOfDailyFeedings = numberOfDailyFeedings;
     }
