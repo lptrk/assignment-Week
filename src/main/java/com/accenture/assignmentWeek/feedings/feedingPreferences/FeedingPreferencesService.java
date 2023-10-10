@@ -25,9 +25,6 @@ public class FeedingPreferencesService {
 
         entityToUpdate.setFoodType(feedingPreferencesEntity.getFoodType());
         entityToUpdate.setHorse(feedingPreferencesEntity.getHorse());
-        entityToUpdate.setMinFeedingsPerDay(entityToUpdate.getMinFeedingsPerDay());
-        entityToUpdate.setMaxFeedingsPerDay(entityToUpdate.getMaxFeedingsPerDay());
-        entityToUpdate.setPreferredFeedingsPerDay(entityToUpdate.getPreferredFeedingsPerDay());
 
         return entityToUpdate;
     }

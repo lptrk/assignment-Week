@@ -1,5 +1,6 @@
 package com.accenture.assignmentWeek.feedings.feedingSchedule;
 
+import com.accenture.assignmentWeek.feedings.feedingPreferences.FeedingPreferencesEntity;
 import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;
 
@@ -18,7 +19,9 @@ public class FeedingScheduleEntity {
     @ManyToOne
     @JoinColumn(name = "horse_id")
     private HorseEntity horse;
-
+    @OneToOne
+    @JoinColumn(name = "feeding_preferences_id")
+    private FeedingPreferencesEntity feedingPreferences;
     @Override
     public String toString() {
         return "FeedingScheduleEntity{" +
@@ -83,7 +86,6 @@ public class FeedingScheduleEntity {
         this.numberOfFeedings = numberOfFeedings;
         this.horse = horse;
     }
-
 
 
 }

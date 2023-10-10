@@ -10,5 +10,4 @@ public class MissedFeedingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
 }

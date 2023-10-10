@@ -1,0 +1,24 @@
+package com.accenture.assignmentWeek.horse;
+
+public enum Breed {
+    THOROUGHBRED,
+    ARABIAN,
+    QUARTERHORSE,
+    PAINTHORSE,
+    MORGAN,
+    PERCHERON,
+    APPALOOSA,
+    FRIESIAN,
+    ANDALUSIAN,
+    TENNESSEEWALKINGHORSE,
+    CLYDESDALE,
+    SHETLANDPONY,
+    PALOMINO,
+    WELSHPONY,
+    IRISHDRAUGHT,
+    MUSTANG,
+    LIPPIZANER,
+    HAFLINGER,
+    AKHALTEKE,
+    GYPSYVANNER
+}
