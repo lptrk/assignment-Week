@@ -32,7 +32,6 @@ public class HorseService {
         entityToUpdate.setFeedingSchedules(horse.getFeedingSchedules());
         entityToUpdate.setOwner(horse.getOwner());
         entityToUpdate.setNickName(horse.getNickName());
-        entityToUpdate.setNumberOfDailyFeedings(horse.getNumberOfDailyFeedings());
         entityToUpdate.setStable(horse.getStable());
 
         return entityToUpdate;

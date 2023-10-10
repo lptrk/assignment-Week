@@ -1,10 +1,12 @@
 package com.accenture.assignmentWeek.feedings.feedingSchedule;
 
+import com.accenture.assignmentWeek.feedings.feeding.FeedingEntity;
 import com.accenture.assignmentWeek.feedings.feedingPreferences.FeedingPreferencesEntity;
 import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,7 +23,8 @@ public class FeedingScheduleEntity {
     @OneToOne
     @JoinColumn(name = "feeding_preferences_id")
     private FeedingPreferencesEntity feedingPreferences;
-
+    @OneToMany(mappedBy = "feedingSchedule")
+    private List<FeedingEntity> feedings;
     @Override
     public String toString() {
         return "FeedingScheduleEntity{" +

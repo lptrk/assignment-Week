@@ -1,9 +1,11 @@
 package com.accenture.assignmentWeek.feedings.feedingPreferences;
 
+import com.accenture.assignmentWeek.feedings.feeding.FeedingEntity;
 import com.accenture.assignmentWeek.feedings.feedingSchedule.FeedingScheduleEntity;
 import com.accenture.assignmentWeek.horse.HorseEntity;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +19,8 @@ public class FeedingPreferencesEntity {
     private HorseEntity horse;
 
     private String foodType; //TODO: Add FoodTypeEntity
-    @OneToOne(mappedBy = "feedingPreferences")
-    private FeedingScheduleEntity feedingSchedule; //List<feedingScheduleEntities>
+    @OneToMany(mappedBy = "feedingPreferences")
+    private List<FeedingEntity> feedings;
     public FeedingPreferencesEntity() {
     }
 

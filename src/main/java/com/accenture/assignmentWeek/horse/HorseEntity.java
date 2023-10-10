@@ -1,5 +1,6 @@
 package com.accenture.assignmentWeek.horse;
 
+import com.accenture.assignmentWeek.feedings.feeding.FeedingEntity;
 import com.accenture.assignmentWeek.feedings.feedingPreferences.FeedingPreferencesEntity;
 import com.accenture.assignmentWeek.feedings.feedingSchedule.FeedingScheduleEntity;
 import com.accenture.assignmentWeek.stable.StableEntity;
@@ -21,11 +22,16 @@ public class HorseEntity {
     @ManyToOne
     @JoinColumn(name = "stable_id")
     private StableEntity stable;
+
     @OneToMany(mappedBy = "horse")
     private List<FeedingScheduleEntity> feedingSchedules;
+
+    @ManyToOne
+    @JoinColumn(name = "feeding_preferences_id")
+    private FeedingPreferencesEntity feedingPreferences;
+
     @OneToMany(mappedBy = "horse")
-    private List<FeedingPreferencesEntity> feedingPreferences;
-    private LocalDateTime lastFeedingTime;
+    private List<FeedingEntity> feedings;
 
     public HorseEntity() {
 
@@ -41,7 +47,6 @@ public class HorseEntity {
                 ", owner='" + owner + '\'' +
                 ", stable=" + stable +
                 ", feedingSchedules=" + feedingSchedules +
-                ", lastFeedingTime=" + lastFeedingTime +
                 '}';
     }
 
@@ -50,12 +55,12 @@ public class HorseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HorseEntity that = (HorseEntity) o;
-        return Objects.equals(rfid, that.rfid) && Objects.equals(name, that.name) && Objects.equals(nickName, that.nickName) && Objects.equals(breed, that.breed) && Objects.equals(owner, that.owner) && Objects.equals(stable, that.stable) && Objects.equals(feedingSchedules, that.feedingSchedules) && Objects.equals(lastFeedingTime, that.lastFeedingTime);
+        return Objects.equals(rfid, that.rfid) && Objects.equals(name, that.name) && Objects.equals(nickName, that.nickName) && Objects.equals(breed, that.breed) && Objects.equals(owner, that.owner) && Objects.equals(stable, that.stable) && Objects.equals(feedingSchedules, that.feedingSchedules);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rfid, name, nickName, breed, owner, stable, feedingSchedules, lastFeedingTime);
+        return Objects.hash(rfid, name, nickName, breed, owner, stable, feedingSchedules);
     }
 
     public String getRfid() {
@@ -114,17 +119,6 @@ public class HorseEntity {
         this.feedingSchedules = feedingSchedules;
     }
 
-    public LocalDateTime getLastFeedingTime() {
-        return lastFeedingTime;
-    }
-
-    public void setLastFeedingTime(LocalDateTime lastFeedingTime) {
-        this.lastFeedingTime = lastFeedingTime;
-    }
-
-    public HorseEntity(List<FeedingPreferencesEntity> feedingPreferences) {
-        this.feedingPreferences = feedingPreferences;
-    }
 
     public HorseEntity(String rfid, String name, String nickName, Breed breed, String owner, StableEntity stable, List<FeedingScheduleEntity> feedingSchedules, List<FeedingPreferencesEntity> feedingPreferences, LocalDateTime lastFeedingTime, Integer numberOfDailyFeedings) {
         this.rfid = rfid;
@@ -134,8 +128,6 @@ public class HorseEntity {
         this.owner = owner;
         this.stable = stable;
         this.feedingSchedules = feedingSchedules;
-        this.feedingPreferences = feedingPreferences;
-        this.lastFeedingTime = lastFeedingTime;
     }
 
 
