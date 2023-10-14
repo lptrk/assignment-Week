@@ -10,7 +10,6 @@ public class StableDTOMapper {
     public static Stable toEntity(StableCreationDTO creationDTO) {
         Stable stable = new Stable();
         stable.setName(creationDTO.getName());
-        // Setzen Sie die Pferde-Ids im Entity, falls vorhanden
         if (creationDTO.getHorses() != null) {
             List<Horse> horses = new ArrayList<>();
             for (String rfid : creationDTO.getHorses()) {
@@ -27,7 +26,6 @@ public class StableDTOMapper {
         StableResponseDTO responseDTO = new StableResponseDTO();
         responseDTO.setId(stable.getId());
         responseDTO.setName(stable.getName());
-        // Extrahieren Sie die Pferde-Ids aus dem Entity, falls vorhanden
         if (stable.getHorses() != null) {
             List<String> horseIds = stable.getHorses().stream()
                     .map(Horse::getRfid)

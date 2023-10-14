@@ -1,7 +1,5 @@
 package dev.lptrk.horsefeeding.feedingSchedule;
 
-import dev.lptrk.horsefeeding.horse.Horse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,15 +35,12 @@ public class FeedingScheduleService {
 
     public FeedingScheduleDTO updateFeedingScheduleById(Integer id, FeedingScheduleDTO feedingScheduleDTO) {
         FeedingSchedule feedingScheduleToUpdate = feedingScheduleRepository.findById(id).orElseThrow();
-        FeedingSchedule updatedFeedingSchedule = feedingScheduleDTOMapper.toEntity(feedingScheduleDTO); // Ändere dies
-        updatedFeedingSchedule.setId(id); // Setze die ID des aktualisierten FeedingSchedule
+        FeedingSchedule updatedFeedingSchedule = feedingScheduleDTOMapper.toEntity(feedingScheduleDTO);
+        updatedFeedingSchedule.setId(id);
         updatedFeedingSchedule = feedingScheduleRepository.save(updatedFeedingSchedule);
         return feedingScheduleDTOMapper.toDTO(updatedFeedingSchedule);
     }
 
-    public List<FeedingSchedule> getFeedingScheduleByHorseRfid(String horseId) {
-        return feedingScheduleRepository.getFeedingSchedulesByHorseRfid(horseId);
-    }
 
     public void deleteFeedingScheduleById(Integer id) {
         feedingScheduleRepository.deleteById(id);

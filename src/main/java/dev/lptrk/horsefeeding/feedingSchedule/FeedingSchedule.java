@@ -4,7 +4,7 @@ import dev.lptrk.horsefeeding.horse.Horse;
 import dev.lptrk.horsefeeding.horse.HorseDTO;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -15,8 +15,8 @@ public class FeedingSchedule {
     @ManyToOne
     @JoinColumn(name = "horseId")
     private Horse horse;
-    private LocalDateTime minFeedingTime;
-    private LocalDateTime maxFeedingTime;
+    private LocalTime minFeedingTime;
+    private LocalTime maxFeedingTime;
 
     @Override
     public String toString() {
@@ -57,23 +57,23 @@ public class FeedingSchedule {
         this.horse = horse;
     }
 
-    public LocalDateTime getMinFeedingTime() {
+    public LocalTime getMinFeedingTime() {
         return minFeedingTime;
     }
 
-    public void setMinFeedingTime(LocalDateTime minFeedingTime) {
+    public void setMinFeedingTime(LocalTime minFeedingTime) {
         this.minFeedingTime = minFeedingTime;
     }
 
-    public LocalDateTime getMaxFeedingTime() {
+    public LocalTime getMaxFeedingTime() {
         return maxFeedingTime;
     }
 
-    public void setMaxFeedingTime(LocalDateTime maxFeedingTime) {
+    public void setMaxFeedingTime(LocalTime maxFeedingTime) {
         this.maxFeedingTime = maxFeedingTime;
     }
 
-    public FeedingSchedule(Integer id, Horse horse, LocalDateTime minFeedingTime, LocalDateTime maxFeedingTime) {
+    public FeedingSchedule(Integer id, Horse horse, LocalTime minFeedingTime, LocalTime maxFeedingTime) {
         this.id = id;
         this.horse = horse;
         this.minFeedingTime = minFeedingTime;

@@ -2,8 +2,6 @@ package dev.lptrk.horsefeeding.horse;
 
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingSchedule;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleRepository;
-import dev.lptrk.horsefeeding.stable.Stable;
-import dev.lptrk.horsefeeding.stable.StableDTOMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,6 @@ public class HorseService {
 
     public HorseDTO createHorse(HorseDTO horseDTO) {
         List<Integer> feedingScheduleIds = horseDTO.getFeedingScheduleIds();
-        // Überprüfe, ob die feedingScheduleIds vorhanden sind und nicht leer sind
         if (feedingScheduleIds != null && !feedingScheduleIds.isEmpty()) {
             List<FeedingSchedule> feedingSchedules = feedingScheduleRepository.findAllById(feedingScheduleIds);
             Horse horse = HorseDTOMapper.toEntity(horseDTO, feedingScheduleRepository);
@@ -30,10 +27,9 @@ public class HorseService {
             Horse createdHorse = horseRepository.save(horse);
 
             return HorseDTOMapper.toDTO(createdHorse);
-        } else {
-            // Hier kannst du eine Fehlerbehandlung hinzufügen, wenn keine gültigen feedingScheduleIds übergeben wurden
-            // Zum Beispiel: Fehlermeldung oder eine spezielle Exception werfen
-            return null;
+        }
+        else{
+            return null; //TODO: throw exception
         }
     }
 
@@ -59,9 +55,6 @@ public class HorseService {
         return HorseDTOMapper.toDTO(updatedHorse);
     }
 
-    public List<Horse> getHorsesByStableId(Integer stableId) {
-        return horseRepository.getHorsesByStableId(stableId);
-    }
 
     public void deleteHorseById(String id) {
         horseRepository.deleteById(id);

@@ -1,11 +1,11 @@
 package dev.lptrk.horsefeeding.feedingSchedule;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class FeedingScheduleDTO {
     private Integer id;
-    private LocalDateTime minFeedingTime;
-    private LocalDateTime maxFeedingTime;
+    private LocalTime minFeedingTime;
+    private LocalTime maxFeedingTime;
     private String horseId;
 
     public Integer getId() {
@@ -16,19 +16,19 @@ public class FeedingScheduleDTO {
         this.id = id;
     }
 
-    public LocalDateTime getMinFeedingTime() {
+    public LocalTime getMinFeedingTime() {
         return minFeedingTime;
     }
 
-    public void setMinFeedingTime(LocalDateTime minFeedingTime) {
+    public void setMinFeedingTime(LocalTime minFeedingTime) {
         this.minFeedingTime = minFeedingTime;
     }
 
-    public LocalDateTime getMaxFeedingTime() {
+    public LocalTime getMaxFeedingTime() {
         return maxFeedingTime;
     }
 
-    public void setMaxFeedingTime(LocalDateTime maxFeedingTime) {
+    public void setMaxFeedingTime(LocalTime maxFeedingTime) {
         this.maxFeedingTime = maxFeedingTime;
     }
 
