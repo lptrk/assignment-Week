@@ -35,7 +35,7 @@ public class HorseService {
         }
     }
 
-    public List<HorseDTO> getHorsesEligibleForFeeding() {
+    public List<HorseDTO> getHorsesEligibleForFeedingNow() {
         List<HorseDTO> eligibleHorses = null;
         List<HorseDTO> allHorses = getAllHorses();
         LocalTime now = LocalTime.now();
@@ -49,7 +49,20 @@ public class HorseService {
         }
         return eligibleHorses;
     }
-
+    public List<HorseDTO> getHorsesEligibleForFeedingAtCutsomTime(String timeEntered) {
+        List<HorseDTO> eligibleHorses = null;
+        List<HorseDTO> allHorses = getAllHorses();
+        LocalTime time = LocalTime.parse(timeEntered);
+        for(HorseDTO horse: allHorses){
+            List<FeedingSchedule> schedulesForThisHorse = feedingScheduleRepository.findAllById(horse.getFeedingScheduleIds());
+            for(FeedingSchedule schedule: schedulesForThisHorse){
+                if(time.isAfter(schedule.getMinFeedingTime()) && time.isBefore(schedule.getMaxFeedingTime())){
+                    eligibleHorses.add(horse);
+                }
+            }
+        }
+        return eligibleHorses;
+    }
     public List<HorseDTO> getAllHorses() {
         List<Horse> horses = horseRepository.findAll();
         return horses.stream()

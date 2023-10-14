@@ -26,7 +26,11 @@ public class HorseController {
 
     @GetMapping("/eligible")
     public ResponseEntity<List<HorseDTO>> getHorsesEligibleForFeeding() {
-        return ResponseEntity.ok(horseService.getHorsesEligibleForFeeding());
+        return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingNow());
+    }
+    @GetMapping("/eligible/")
+    public ResponseEntity<List<HorseDTO>> getHorsesEligibleForFeedingAtCutsomTime(@RequestParam("time") String time) {
+        return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingAtCutsomTime(time));
     }
     @PostMapping("")
     public ResponseEntity<HorseDTO> createHorse(@RequestBody HorseDTO horseDTO) {
