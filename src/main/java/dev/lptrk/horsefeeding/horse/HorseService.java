@@ -1,9 +1,11 @@
 package dev.lptrk.horsefeeding.horse;
 
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingSchedule;
+import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleDTO;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,8 +35,20 @@ public class HorseService {
         }
     }
 
-
-
+    public List<HorseDTO> getHorsesEligibleForFeeding() {
+        List<HorseDTO> eligibleHorses = null;
+        List<HorseDTO> allHorses = getAllHorses();
+        LocalTime now = LocalTime.now();
+        for(HorseDTO horse: allHorses){
+            List<FeedingSchedule> schedulesForThisHorse = feedingScheduleRepository.findAllById(horse.getFeedingScheduleIds());
+            for(FeedingSchedule schedule: schedulesForThisHorse){
+                if(now.isAfter(schedule.getMinFeedingTime()) && now.isBefore(schedule.getMaxFeedingTime())){
+                   eligibleHorses.add(horse);
+                }
+            }
+        }
+        return eligibleHorses;
+    }
 
     public List<HorseDTO> getAllHorses() {
         List<Horse> horses = horseRepository.findAll();
@@ -54,6 +68,7 @@ public class HorseService {
         Horse updatedHorse = horseRepository.save(horseToUpdate);
         return HorseDTOMapper.toDTO(updatedHorse);
     }
+
 
 
     public void deleteHorseById(String id) {

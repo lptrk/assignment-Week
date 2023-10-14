@@ -24,6 +24,10 @@ public class HorseController {
         return ResponseEntity.ok(horseService.getHorse(id));
     }
 
+    @GetMapping("/eligible")
+    public ResponseEntity<List<HorseDTO>> getHorsesEligibleForFeeding() {
+        return ResponseEntity.ok(horseService.getHorsesEligibleForFeeding());
+    }
     @PostMapping("")
     public ResponseEntity<HorseDTO> createHorse(@RequestBody HorseDTO horseDTO) {
         return ResponseEntity.ok(horseService.createHorse(horseDTO));
