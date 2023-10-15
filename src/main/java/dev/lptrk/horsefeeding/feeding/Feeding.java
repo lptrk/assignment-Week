@@ -6,15 +6,110 @@ import jakarta.persistence.*;
 import java.time.LocalTime;
 import java.util.Objects;
 
+/**
+ * Represents a feeding event for a horse at a specific time.
+ */
 @Entity
 public class Feeding {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+
+    /**
+     * The horse associated with this feeding event.
+     */
     @ManyToOne
     @JoinColumn(name = "horseId")
     private Horse horse;
+
+    /**
+     * The time at which the feeding event occurred.
+     */
     private LocalTime feedingTime;
+
+    /**
+     * Constructs a new Feeding instance.
+     */
+    public Feeding() {
+    }
+
+    /**
+     * Constructs a new Feeding instance with the specified ID and feeding time.
+     *
+     * @param id           The unique identifier for the feeding event.
+     * @param feedingTime  The time at which the feeding event occurred.
+     */
+    public Feeding(Integer id, LocalTime feedingTime) {
+        this.id = id;
+        this.feedingTime = feedingTime;
+    }
+
+    /**
+     * Constructs a new Feeding instance with the specified ID, associated horse, and feeding time.
+     *
+     * @param id           The unique identifier for the feeding event.
+     * @param horse        The horse associated with the feeding event.
+     * @param feedingTime  The time at which the feeding event occurred.
+     */
+    public Feeding(Integer id, Horse horse, LocalTime feedingTime) {
+        this.id = id;
+        this.horse = horse;
+        this.feedingTime = feedingTime;
+    }
+
+    /**
+     * Gets the unique identifier of the feeding event.
+     *
+     * @return The ID of the feeding event.
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * Sets the unique identifier of the feeding event.
+     *
+     * @param id The ID of the feeding event.
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the associated horse of the feeding event.
+     *
+     * @return The associated horse.
+     */
+    public Horse getHorse() {
+        return horse;
+    }
+
+    /**
+     * Sets the associated horse of the feeding event.
+     *
+     * @param horse The associated horse.
+     */
+    public void setHorse(Horse horse) {
+        this.horse = horse;
+    }
+
+    /**
+     * Gets the time at which the feeding event occurred.
+     *
+     * @return The feeding time.
+     */
+    public LocalTime getFeedingTime() {
+        return feedingTime;
+    }
+
+    /**
+     * Sets the time at which the feeding event occurred.
+     *
+     * @param feedingTime The feeding time.
+     */
+    public void setFeedingTime(LocalTime feedingTime) {
+        this.feedingTime = feedingTime;
+    }
 
     @Override
     public String toString() {
@@ -36,44 +131,5 @@ public class Feeding {
     @Override
     public int hashCode() {
         return Objects.hash(id, horse, feedingTime);
-    }
-
-    public Horse getHorse() {
-        return horse;
-    }
-
-    public void setHorse(Horse horse) {
-        this.horse = horse;
-    }
-
-    public Feeding(Integer id, Horse horse, LocalTime feedingTime) {
-        this.id = id;
-        this.horse = horse;
-        this.feedingTime = feedingTime;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
-    public LocalTime getFeedingTime() {
-        return feedingTime;
-    }
-
-    public void setFeedingTime(LocalTime feedingTime) {
-        this.feedingTime = feedingTime;
-    }
-
-    public Feeding(Integer id, LocalTime feedingTime) {
-        this.id = id;
-        this.feedingTime = feedingTime;
-    }
-
-    public Feeding() {
     }
 }

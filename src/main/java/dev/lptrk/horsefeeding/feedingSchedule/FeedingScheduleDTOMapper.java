@@ -3,9 +3,18 @@ package dev.lptrk.horsefeeding.feedingSchedule;
 import dev.lptrk.horsefeeding.horse.Horse;
 import org.springframework.stereotype.Component;
 
+/**
+ * A mapper class for converting between FeedingSchedule and FeedingScheduleDTO objects.
+ */
 @Component
 public class FeedingScheduleDTOMapper {
 
+    /**
+     * Converts a FeedingSchedule object to a FeedingScheduleDTO object.
+     *
+     * @param feedingSchedule The FeedingSchedule object to convert.
+     * @return The corresponding FeedingScheduleDTO object.
+     */
     public FeedingScheduleDTO toDTO(FeedingSchedule feedingSchedule) {
         FeedingScheduleDTO dto = new FeedingScheduleDTO();
         dto.setId(feedingSchedule.getId());
@@ -19,6 +28,12 @@ public class FeedingScheduleDTOMapper {
         return dto;
     }
 
+    /**
+     * Converts a FeedingScheduleDTO object to a FeedingSchedule object.
+     *
+     * @param dto The FeedingScheduleDTO object to convert.
+     * @return The corresponding FeedingSchedule object.
+     */
     public FeedingSchedule toEntity(FeedingScheduleDTO dto) {
         FeedingSchedule feedingSchedule = new FeedingSchedule();
         feedingSchedule.setId(dto.getId());
@@ -33,6 +48,4 @@ public class FeedingScheduleDTOMapper {
 
         return feedingSchedule;
     }
-
 }
-
