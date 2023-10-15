@@ -1,5 +1,6 @@
 package dev.lptrk.horsefeeding.horse;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +27,21 @@ public class HorseController {
 
     @GetMapping("/eligible")
     public ResponseEntity<List<HorseDTO>> getHorsesEligibleForFeeding() {
-        return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingNow());
+        try {
+            return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingNow());
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
+
     @GetMapping("/eligible/")
     public ResponseEntity<List<HorseDTO>> getHorsesEligibleForFeedingAtCutsomTime(@RequestParam("time") String time) {
-        return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingAtCutsomTime(time));
-    }
+        try {
+            return ResponseEntity.ok(horseService.getHorsesEligibleForFeedingAtCutsomTime(time));
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }    }
+
     @PostMapping("")
     public ResponseEntity<HorseDTO> createHorse(@RequestBody HorseDTO horseDTO) {
         return ResponseEntity.ok(horseService.createHorse(horseDTO));

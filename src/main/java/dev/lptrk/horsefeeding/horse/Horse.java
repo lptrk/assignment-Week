@@ -1,5 +1,6 @@
 package dev.lptrk.horsefeeding.horse;
 
+import dev.lptrk.horsefeeding.feeding.Feeding;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingSchedule;
 import dev.lptrk.horsefeeding.stable.Stable;
 import jakarta.persistence.*;
@@ -21,6 +22,9 @@ public class Horse {
     private Stable stable;
     @OneToMany(mappedBy = "horse")
     private List<FeedingSchedule> feedingSchedules;
+
+    @OneToMany(mappedBy = "horse")
+    private List<Feeding> feedings;
 
     public List<FeedingSchedule> getFeedingSchedules() {
         return feedingSchedules;

@@ -3,10 +3,12 @@ package dev.lptrk.horsefeeding.horse;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingSchedule;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleRepository;
 import dev.lptrk.horsefeeding.stable.Stable;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class HorseDTOMapper {
 
     public static HorseDTO toDTO(Horse horse) {
