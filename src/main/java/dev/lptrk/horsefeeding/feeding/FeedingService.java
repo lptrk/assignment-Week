@@ -1,16 +1,13 @@
 package dev.lptrk.horsefeeding.feeding;
 
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingSchedule;
-import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleDTO;
 import dev.lptrk.horsefeeding.feedingSchedule.FeedingScheduleRepository;
-import dev.lptrk.horsefeeding.horse.Horse;
 import dev.lptrk.horsefeeding.horse.HorseDTO;
 import dev.lptrk.horsefeeding.horse.HorseDTOMapper;
 import dev.lptrk.horsefeeding.horse.HorseService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +16,6 @@ public class FeedingService {
     private final FeedingRepository feedingRepository;
     private final FeedingDTOMapper mapper;
     private final HorseService horseService;
-    private final HorseDTOMapper horseDTOMapper;
     private final FeedingScheduleRepository feedingScheduleRepository;
 
 
@@ -27,7 +23,6 @@ public class FeedingService {
         this.feedingRepository = feedingRepository;
         this.mapper = mapper;
         this.horseService = horseService;
-        this.horseDTOMapper = horseDTOMapper;
         this.feedingScheduleRepository = feedingScheduleRepository;
     }
 
@@ -54,7 +49,12 @@ public class FeedingService {
                 createdFeeding = feedingRepository.save(mapper.toEntity(feedingDTO));
             }
         }
-        return mapper.toDTO(createdFeeding);
+        if (createdFeeding != null) {
+            return mapper.toDTO(createdFeeding);
+        }
+        else {
+            return null;
+        }
     }
 
     public FeedingDTO updateFeeding(Integer id, FeedingDTO feedingDTO) {
