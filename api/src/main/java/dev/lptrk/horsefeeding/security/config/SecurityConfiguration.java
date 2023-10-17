@@ -38,30 +38,26 @@ public class SecurityConfiguration {
                 .csrf(csrf-> csrf.disable())
                 .authorizeHttpRequests( request -> request
                 .requestMatchers(
-                        "api/v1/**"
+                        "api/v1/auth**"
                 )
                 .permitAll()
 
 
-                /* .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
-
-                 .requestMatchers(GET, "/api/v1/admin/**").hasAuthority(ADMIN_READ.name())
-                 .requestMatchers(POST, "/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
-                 .requestMatchers(PUT, "/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
-                 .requestMatchers(DELETE, "/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())*/
 
 
                 .anyRequest()
                 .authenticated()
                 )
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout()
-                .logoutUrl("/api/v1/auth/logout")
-                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                .logout((logout) -> logout
+
+                        .logoutUrl("/api/v1/auth/logout")
+                        .addLogoutHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+                )
         ;
 
         return http.build();
