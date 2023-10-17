@@ -3,6 +3,8 @@ package dev.lptrk.horsefeeding.feeding;
 import dev.lptrk.horsefeeding.horse.Horse;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -23,9 +25,9 @@ public class Feeding {
     private Horse horse;
 
     /**
-     * The time at which the feeding event occurred.
+     * The time and date at which the feeding event occurred.
      */
-    private LocalTime feedingTime;
+    private LocalDateTime feedingTime;
 
     /**
      * Constructs a new Feeding instance.
@@ -39,7 +41,7 @@ public class Feeding {
      * @param id           The unique identifier for the feeding event.
      * @param feedingTime  The time at which the feeding event occurred.
      */
-    public Feeding(Integer id, LocalTime feedingTime) {
+    public Feeding(Integer id, LocalDateTime feedingTime) {
         this.id = id;
         this.feedingTime = feedingTime;
     }
@@ -51,7 +53,7 @@ public class Feeding {
      * @param horse        The horse associated with the feeding event.
      * @param feedingTime  The time at which the feeding event occurred.
      */
-    public Feeding(Integer id, Horse horse, LocalTime feedingTime) {
+    public Feeding(Integer id, Horse horse, LocalDateTime feedingTime) {
         this.id = id;
         this.horse = horse;
         this.feedingTime = feedingTime;
@@ -98,7 +100,7 @@ public class Feeding {
      *
      * @return The feeding time.
      */
-    public LocalTime getFeedingTime() {
+    public LocalDateTime getFeedingTime() {
         return feedingTime;
     }
 
@@ -107,7 +109,7 @@ public class Feeding {
      *
      * @param feedingTime The feeding time.
      */
-    public void setFeedingTime(LocalTime feedingTime) {
+    public void setFeedingTime(LocalDateTime feedingTime) {
         this.feedingTime = feedingTime;
     }
 

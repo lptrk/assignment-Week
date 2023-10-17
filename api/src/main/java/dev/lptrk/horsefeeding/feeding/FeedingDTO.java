@@ -1,5 +1,7 @@
 package dev.lptrk.horsefeeding.feeding;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -11,7 +13,7 @@ public class FeedingDTO {
      *
      * @return The feeding time.
      */
-    private LocalTime feedingTime;
+    private LocalDateTime feedingTime;
 
     /**
      * The unique identifier of the horse associated with the feeding event.
@@ -25,7 +27,7 @@ public class FeedingDTO {
      *
      * @return The feeding time.
      */
-    public LocalTime getFeedingTime() {
+    public LocalDateTime getFeedingTime() {
         return feedingTime;
     }
 
@@ -34,7 +36,7 @@ public class FeedingDTO {
      *
      * @param feedingTime The feeding time.
      */
-    public void setFeedingTime(LocalTime feedingTime) {
+    public void setFeedingTime(LocalDateTime feedingTime) {
         this.feedingTime = feedingTime;
     }
 

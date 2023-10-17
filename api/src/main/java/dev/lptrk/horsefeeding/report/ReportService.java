@@ -47,8 +47,8 @@ public class ReportService {
             boolean isCompleted = false;
 
             for (FeedingScheduleDTO feedingSchedule : allFeedingSchedules) {
-                if (feedingSchedule.getMinFeedingTime().isBefore(feeding.getFeedingTime()) &&
-                        feedingSchedule.getMaxFeedingTime().isAfter(feeding.getFeedingTime())) {
+                if (feedingSchedule.getMinFeedingTime().isBefore(feeding.getFeedingTime().toLocalTime()) &&
+                        feedingSchedule.getMaxFeedingTime().isAfter(feeding.getFeedingTime().toLocalTime())) {
                     isCompleted = true;
                     break;
                 }

@@ -7,6 +7,8 @@ import dev.lptrk.horsefeeding.horse.HorseService;
 import dev.lptrk.horsefeeding.horse.HorseDTOMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,12 +68,12 @@ public class FeedingService {
      * @return The created FeedingDTO.
      */
     public FeedingDTO createFeeding(FeedingDTO feedingDTO) {
-        LocalTime time = feedingDTO.getFeedingTime();
+        LocalDateTime time = feedingDTO.getFeedingTime();
         HorseDTO horseToFeed = horseService.getHorse(feedingDTO.getHorseId());
         List<FeedingSchedule> feedingSchedulesOfHorseToFeed = feedingScheduleRepository.findAllById(horseToFeed.getFeedingScheduleIds());
         Feeding createdFeeding = null;
         for (FeedingSchedule feedingSchedule : feedingSchedulesOfHorseToFeed) {
-            if (time.isAfter(feedingSchedule.getMinFeedingTime()) && time.isBefore(feedingSchedule.getMaxFeedingTime())) {
+            if (time.toLocalTime().isAfter(feedingSchedule.getMinFeedingTime()) && time.toLocalTime().isBefore(feedingSchedule.getMaxFeedingTime())) {
                 feedingDTO.setHorseId(horseToFeed.getRfid());
                 createdFeeding = feedingRepository.save(mapper.toEntity(feedingDTO));
             }

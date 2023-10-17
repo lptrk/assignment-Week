@@ -1,5 +1,6 @@
 package dev.lptrk.horsefeeding.feedingSchedule;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.lptrk.horsefeeding.horse.Horse;
 import jakarta.persistence.*;
 
@@ -17,7 +18,9 @@ public class FeedingSchedule {
     @ManyToOne
     @JoinColumn(name = "horseId")
     private Horse horse;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime minFeedingTime;
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime maxFeedingTime;
 
     /**
