@@ -1,5 +1,6 @@
 package dev.lptrk.horsefeeding.feeding;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.lptrk.horsefeeding.horse.Horse;
 import jakarta.persistence.*;
 
@@ -27,6 +28,7 @@ public class Feeding {
     /**
      * The time and date at which the feeding event occurred.
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime feedingTime;
 
     /**
