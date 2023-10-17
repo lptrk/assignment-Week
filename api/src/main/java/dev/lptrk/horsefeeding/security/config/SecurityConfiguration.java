@@ -35,9 +35,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
-                .authorizeHttpRequests()
+                .csrf(csrf-> csrf.disable())
+                .authorizeHttpRequests( request -> request
                 .requestMatchers(
                         "api/v1/**"
                 )
@@ -54,7 +53,7 @@ public class SecurityConfiguration {
 
                 .anyRequest()
                 .authenticated()
-                .and()
+                )
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
