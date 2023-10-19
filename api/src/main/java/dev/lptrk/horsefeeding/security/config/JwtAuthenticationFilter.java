@@ -1,5 +1,4 @@
 package dev.lptrk.horsefeeding.security.config;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,6 +15,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * The JwtAuthenticationFilter class is responsible for filtering and processing JWT-based authentication.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -23,6 +25,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Filters and processes incoming HTTP requests for JWT-based authentication.
+     *
+     * @param request     The HTTP request to filter.
+     * @param response    The HTTP response to filter.
+     * @param filterChain The filter chain for handling the request and response.
+     * @throws ServletException If a servlet exception occurs.
+     * @throws IOException      If an I/O exception occurs.
+     */
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,

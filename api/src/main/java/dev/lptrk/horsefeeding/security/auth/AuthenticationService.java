@@ -1,5 +1,4 @@
 package dev.lptrk.horsefeeding.security.auth;
-
 import dev.lptrk.horsefeeding.security.config.JwtService;
 import dev.lptrk.horsefeeding.user.Role;
 import dev.lptrk.horsefeeding.user.UserEty;
@@ -10,6 +9,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * The AuthenticationService class handles user registration and authentication.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -19,8 +21,14 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    /**
+     * Registers a new user.
+     *
+     * @param request The RegisterRequest containing user registration information.
+     * @return An AuthenticationResponse with a JWT token.
+     */
     public AuthenticationResponse register(RegisterRequest request) {
-
+        // Create a UserEty object with user details
         var user = UserEty.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -29,8 +37,10 @@ public class AuthenticationService {
                 .role(Role.USER)
                 .build();
 
+        // Save the user to the repository
         repository.save(user);
 
+        // Generate a JWT token for the registered user
         var jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse
@@ -39,7 +49,14 @@ public class AuthenticationService {
                 .build();
     }
 
+    /**
+     * Authenticates a user.
+     *
+     * @param request The AuthenticationRequest containing user authentication information.
+     * @return An AuthenticationResponse with a JWT token.
+     */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        // Authenticate the user's credentials using the AuthenticationManager
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -47,7 +64,10 @@ public class AuthenticationService {
                 )
         );
 
+        // Fetch the user from the repository
         var user = repository.findByEmail(request.getEmail()).orElseThrow();
+
+        // Generate a JWT token for the authenticated user
         var jwtToken = jwtService.generateToken(user);
 
         return AuthenticationResponse
