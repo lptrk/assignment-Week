@@ -31,20 +31,30 @@ const Register = () => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
         setSignupState({...signupState, [e.target.id]: e.target.value});
 
-    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let isFormValid: boolean = false;
+        if (Object.keys(signupState).length === 5) {
+            isFormValid = true;
+        } else {
+            console.log("Please fill all fields")
+        }
+
+        if (isFormValid) {
+            await createAccount();
+        }
         console.log(signupState);
-        createAccount();
-        setSignupState(fieldsState)
     };
 
-    // Handle Signup API Integration here
     const createAccount = async () => {
         try {
             const response = await axios.post(REGISTER_URL, signupState, {
                 withCredentials: true
             });
-            console.log(response.data); // Die Antwortdaten anzeigen
+            const accessToken = response.data.jwt;
+            setAuth({signupState, accessToken});
+            console.log(accessToken)
+
         } catch (error) {
             console.log(error);
         }
