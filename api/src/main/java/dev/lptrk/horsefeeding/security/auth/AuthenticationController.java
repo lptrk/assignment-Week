@@ -29,7 +29,7 @@ public class AuthenticationController {
      * @param request The AuthenticationRequest containing user authentication information.
      * @return ResponseEntity with an AuthenticationResponse indicating the authentication result.
      */
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }

@@ -1,58 +1,75 @@
-
-import  { useState, ChangeEvent, FormEvent } from 'react';
-import { loginFields } from '../constants/formFields';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import FormAction from './FormAction';
 import FormExtra from './FormExtra';
 import Input from './Input';
+import jwtDecode from 'jwt-decode';
+import Cookies from 'universal-cookie';
+import axios from '../api/axios';
 
-interface Field {
-    id: string;
-    labelText: string;
-    labelFor: string;
-    name: string;
-    type: string;
-    isRequired: boolean;
-    placeholder: string;
-}
-
-const fields: Field[] = loginFields;
-const fieldsState: Record<string, string> = {};
-fields.forEach((field) => (fieldsState[field.id] = ''));
+const LOGIN_URL = '/auth/login';
 
 export default function Login() {
-    const [loginState, setLoginState] = useState(fieldsState);
+    const cookies = new Cookies();
+    const [loginState, setLoginState] = useState({ email: '', password: '' });
+    const [user, setUser] = useState(null);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setLoginState({ ...loginState, [e.target.id]: e.target.value });
+        const { id, value } = e.target;
+        setLoginState({ ...loginState, [id]: value });
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        authenticateUser();
+        await authenticateUser();
     };
 
-    // Handle Login API Integration here
-    const authenticateUser = () => {
-        // Implement authentication logic here
+    const authenticateUser = async () => {
+        try {
+            const response = await axios.post(LOGIN_URL, loginState, {
+                withCredentials: true,
+            });
+            const accessToken = response.data.jwt;
+            console.log(accessToken);
+            login(accessToken);
+        } catch (error) {
+            console.log(error);
+            // Handle authentication error, e.g., show an error message to the user
+        }
+    };
+
+    const login = (token: string) => {
+        const decoded: any = jwtDecode(token);
+        setUser(decoded);
+        cookies.set(decoded.sub, decoded, { expires: new Date(decoded.exp * 1000) });
     };
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="-space-y-px">
-                {fields.map((field) => (
-                    <Input
-                        key={field.id}
-                        handleChange={handleChange}
-                        value={loginState[field.id]}
-                        labelText={field.labelText}
-                        labelFor={field.labelFor}
-                        id={field.id}
-                        name={field.name}
-                        type={field.type}
-                        isRequired={field.isRequired}
-                        placeholder={field.placeholder}
-                    />
-                ))}
+                <Input
+                    key="email"
+                    handleChange={handleChange}
+                    value={loginState.email}
+                    labelText="Email"
+                    labelFor="email"
+                    id="email"
+                    name="email"
+                    type="text"
+                    isRequired={true}
+                    placeholder="Enter your email"
+                />
+                <Input
+                    key="password"
+                    handleChange={handleChange}
+                    value={loginState.password}
+                    labelText="Password"
+                    labelFor="password"
+                    id="password"
+                    name="password"
+                    type="password"
+                    isRequired={true}
+                    placeholder="Enter your password"
+                />
             </div>
 
             <FormExtra />

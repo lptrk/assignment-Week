@@ -1,12 +1,12 @@
-import {ChangeEvent, FormEvent, useContext, useState} from 'react';
-
-import AuthContext from "../context/AuthProvider"
-import {signupFields} from '../constants/formFields';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { signupFields } from '../constants/formFields';
 import FormAction from './FormAction';
 import Input from './Input';
-import axios from "../api/axios";
+import axios from '../api/axios';
+import jwtDecode from 'jwt-decode';
+import Cookies from 'universal-cookie';
 
-const REGISTER_URL = " http://localhost:8080/api/v1/auth/register";
+const REGISTER_URL = '/auth/register';
 
 interface Field {
     id: string;
@@ -18,67 +18,69 @@ interface Field {
     placeholder: string;
 }
 
-const fields: Field[] = signupFields;
+const initialSignupState: Record<string, string> = {};
+signupFields.forEach((field) => (initialSignupState[field.id] = ''));
 
 const Register = () => {
-    const {setAuth} = useContext(AuthContext);
-    const fieldsState: Record<string, string> = {};
+    const [signupState, setSignupState] = useState(initialSignupState);
+    const cookies = new Cookies();
+    const [user, setUser] = useState(null);
 
-    fields.forEach((field) => (fieldsState[field.id] = ''));
-
-    const [signupState, setSignupState] = useState(fieldsState);
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setSignupState({...signupState, [e.target.id]: e.target.value});
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        let isFormValid: boolean = false;
-        if (Object.keys(signupState).length === 5) {
-            isFormValid = true;
-        } else {
-            console.log("Please fill all fields")
-        }
-
-        if (isFormValid) {
-            await createAccount();
-        }
-        console.log(signupState);
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setSignupState({ ...signupState, [id]: value });
     };
 
     const createAccount = async () => {
         try {
             const response = await axios.post(REGISTER_URL, signupState, {
-                withCredentials: true
+                withCredentials: true,
             });
             const accessToken = response.data.jwt;
-            setAuth({signupState, accessToken});
-            console.log(accessToken)
-
+            console.log(accessToken);
+            await registerUser(signupState);
         } catch (error) {
             console.log(error);
         }
     };
 
+    const registerUser = async (state: any) => {
+        try {
+            const response = await axios.post(REGISTER_URL, state, {
+                withCredentials: true,
+            });
+            const accessToken = response.data.jwt;
+            console.log(accessToken);
+            login(accessToken);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const login = (token: string) => {
+        const decoded: any = jwtDecode(token);
+        setUser(decoded);
+        cookies.set('user', decoded, { expires: new Date(decoded.exp * 1000) });
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await createAccount();
+        console.log(signupState);
+    };
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="">
-                {fields.map((field) => (
+                {signupFields.map((field) => (
                     <Input
                         key={field.id}
                         handleChange={handleChange}
                         value={signupState[field.id]}
-                        labelText={field.labelText}
-                        labelFor={field.labelFor}
-                        id={field.id}
-                        name={field.name}
-                        type={field.type}
-                        isRequired={field.isRequired}
-                        placeholder={field.placeholder}
+                        {...field}
                     />
                 ))}
-                <FormAction handleSubmit={handleSubmit} text="Signup"/>
+                <FormAction handleSubmit={handleSubmit} text="Signup" />
             </div>
         </form>
     );
