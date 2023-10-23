@@ -1,10 +1,12 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { signupFields } from '../constants/formFields';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {signupFields} from '../constants/formFields';
 import FormAction from './FormAction';
 import Input from './Input';
 import axios from '../api/axios';
 import jwtDecode from 'jwt-decode';
 import Cookies from 'universal-cookie';
+import toast, {Toaster} from 'react-hot-toast';
+import {useNavigate} from "react-router-dom";
 
 const REGISTER_URL = '/auth/register';
 
@@ -25,10 +27,10 @@ const Register = () => {
     const [signupState, setSignupState] = useState(initialSignupState);
     const cookies = new Cookies();
     const [user, setUser] = useState(null);
-
+    const navigate = useNavigate();
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target;
-        setSignupState({ ...signupState, [id]: value });
+        const {id, value} = e.target;
+        setSignupState({...signupState, [id]: value});
     };
 
     const createAccount = async () => {
@@ -37,7 +39,6 @@ const Register = () => {
                 withCredentials: true,
             });
             const accessToken = response.data.jwt;
-            console.log(accessToken);
             await registerUser(signupState);
         } catch (error) {
             console.log(error);
@@ -49,40 +50,50 @@ const Register = () => {
             const response = await axios.post(REGISTER_URL, state, {
                 withCredentials: true,
             });
-            const accessToken = response.data.jwt;
-            console.log(accessToken);
-            login(accessToken);
+            if (response.status == 200) {
+                const accessToken = response.data.jwt;
+                login(accessToken);
+                toast.success('Registration successful');
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            }
+
         } catch (error) {
             console.log(error);
+            toast.error('Registration failed.')
         }
     };
 
     const login = (token: string) => {
         const decoded: any = jwtDecode(token);
         setUser(decoded);
-        cookies.set('user', decoded, { expires: new Date(decoded.exp * 1000) });
+        cookies.set('user', decoded, {expires: new Date(decoded.exp * 1000)});
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await createAccount();
-        console.log(signupState);
     };
 
     return (
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="">
-                {signupFields.map((field) => (
-                    <Input
-                        key={field.id}
-                        handleChange={handleChange}
-                        value={signupState[field.id]}
-                        {...field}
-                    />
-                ))}
-                <FormAction handleSubmit={handleSubmit} text="Signup" />
-            </div>
-        </form>
+        <>
+            <Toaster/>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                <div className="">
+                    {signupFields.map((field) => (
+                        <Input
+                            key={field.id}
+                            handleChange={handleChange}
+                            value={signupState[field.id]}
+                            {...field}
+                        />
+                    ))}
+                    <FormAction handleSubmit={handleSubmit} text="Signup"/>
+                </div>
+            </form>
+        </>
+
     );
 };
 
