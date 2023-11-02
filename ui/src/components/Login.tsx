@@ -34,7 +34,9 @@ export default function Login() {
                 const accessToken = response.data.jwt;
                 login(accessToken);
                 toast.success("Login successful");
-                navigate('/dashboard');
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 2000);
             }
         } catch (error) {
             console.log(error);

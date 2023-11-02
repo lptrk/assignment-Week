@@ -1,5 +1,5 @@
 package dev.lptrk.horsefeeding.security.config;
-import dev.lptrk.horsefeeding.user.UserRepository;
+import dev.lptrk.horsefeeding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
