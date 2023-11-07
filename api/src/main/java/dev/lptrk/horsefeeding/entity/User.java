@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_user")
-public class UserEty implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;

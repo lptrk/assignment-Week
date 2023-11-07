@@ -1,10 +1,10 @@
 package dev.lptrk.horsefeeding.repository;
 
-import dev.lptrk.horsefeeding.entity.UserEty;
+import dev.lptrk.horsefeeding.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserEty, Long> {
-    Optional<UserEty> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 }

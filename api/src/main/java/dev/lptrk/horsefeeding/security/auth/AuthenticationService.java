@@ -1,7 +1,7 @@
 package dev.lptrk.horsefeeding.security.auth;
 import dev.lptrk.horsefeeding.security.config.JwtService;
 import dev.lptrk.horsefeeding.user.Role;
-import dev.lptrk.horsefeeding.entity.UserEty;
+import dev.lptrk.horsefeeding.entity.User;
 import dev.lptrk.horsefeeding.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +29,7 @@ public class AuthenticationService {
      */
     public AuthenticationResponse register(RegisterRequest request) {
         // Create a UserEty object with user details
-        var user = UserEty.builder()
+        var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
